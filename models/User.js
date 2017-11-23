@@ -1,11 +1,17 @@
 const
 	mongoose = require('mongoose'),
 	bcrypt = require('bcrypt-nodejs'),
+
+	ingredientsSchema = new mongoose.Schema({
+		ingredient:{type: String}
+	})
 	userSchema = new mongoose.Schema({
 		name: { type: String },
 		email: { type: String, required: true, unique: true },
-		password: { type: String, required: true }
+		password: { type: String, required: true },
+		cupboard: [ingredientSchema]
 	})
+//
 
 // adds a method to a user document object to create a hashed password
 userSchema.methods.generateHash = function(password) {
